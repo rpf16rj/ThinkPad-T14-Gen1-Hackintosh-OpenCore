@@ -1,68 +1,71 @@
-# Lenovo ThinkPad T14 Gen 1 (Intel) — OpenCore EFI para macOS Sonoma
+# Lenovo ThinkPad T14 Gen 1 (Intel) — OpenCore EFI for macOS Sonoma
 
-EFI otimizada e documentada para **Lenovo ThinkPad T14 Gen 1** rodando **macOS Sonoma 14.7.2** com **OpenCore 1.0.8**.
+Optimized, documented EFI for the **Lenovo ThinkPad T14 Gen 1** running **macOS Sonoma 14.7.2** with **OpenCore 1.0.8**.
 
-> Trabalho realizado em 26/10/2026 com pesquisa spec-driven (4 sub-agentes) + validação no hardware real. Nada foi copiado cegamente — cada mudança tem justificativa documentada em `docs/`.
+> Built through spec-driven research + on-hardware validation. Every change is justified and logged in `docs/`.
 
 ## Hardware
 
-| Componente | Detalhe | Status |
+| Component | Detail | Status |
 |---|---|---|
 | CPU | i7-10610U (Comet Lake, 4C/8T, 15W) | ✅ XCPM + CPUFriend EPP=0xC0 |
 | iGPU | UHD 620 (`0x9B3E`, platform `0x3E9B0000`) | ✅ Metal 3, QuickSync H.264/HEVC |
 | RAM | 40 GB | ✅ |
-| Áudio | Realtek ALC257 | ✅ layout-id 86 (mic do jack funciona) |
+| Audio | Realtek ALC257 | ✅ layout-id 86 (headset jack mic works) |
 | Wi-Fi/BT | Intel CNVi | ✅ AirportItlwm 2.3.0 + BT stack |
 | Ethernet | Intel I219 | ✅ IntelMausi |
 | Trackpad/TrackPoint | Synaptics RMI | ✅ VoodooRMI SMBus |
-| Leitor SD | Realtek | ✅ forks Baio1977 (fix 14.4+) |
-| Bateria | 50Wh | ✅ SMCBatteryManager + YogaSMC |
-| Sleep/Hibernate | S3 + S4 real | ✅ hibernatemode 25, standby 5min |
-| ⚠️ Mic interno | Intel SST | ❌ sem driver (usar headset) |
-| ⚠️ DRM premium | iGPU-only | ❌ Netflix/Prime só via browser |
+| SD reader | Realtek | ✅ Baio1977 forks (14.4+ fix) |
+| Battery | 50Wh | ✅ SMCBatteryManager + YogaSMC |
+| Sleep/Hibernate | S3 + real S4 | ✅ hibernatemode 25, 5min standby |
+| External display | USB-C (DP alt-mode) | ✅ perfect color output |
+| ⚠️ Native HDMI port | EDID negotiates YCbCr on some monitors | ⚠️ use USB-C adapter instead |
+| ⚠️ Internal mic | Intel SST | ❌ no driver (use headset) |
+| ⚠️ Premium DRM | iGPU-only | ❌ Netflix/Prime only via browser |
 
-## Estrutura
+## Structure
 
 ```
-EFI/                  ← EFI funcional ATUAL (copiar p/ partição EFI)
+EFI/                  ← current WORKING EFI (copy to ESP)
 docs/
-  ESTADO_ATUAL.md     ← auditoria inicial do hardware/config
-  RESEARCH.md         ← pesquisa consolidada com fontes
-  PLANO_OTIMIZACAO.md ← plano por tiers + log de aplicação
-  config_dump.json    ← config original exportada
+  ESTADO_ATUAL.md     ← initial hardware/config audit (PT)
+  RESEARCH.md         ← consolidated research with sources (PT)
+  PLANO_OTIMIZACAO.md ← tiered plan + application log (PT)
+  config_dump.json    ← original exported config
 scripts/
-  tier1_pmset.sh      ← ajustes de energia (Tier 1)
-  tier3_pmset.sh      ← hibernação hibernatemode 25 (Tier 3)
-backup_original/      ← config.plist + kexts originais (pré-otimização)
+  tier1_pmset.sh      ← power settings (Tier 1)
+  tier3_pmset.sh      ← hibernation hibernatemode 25 (Tier 3)
+backup_original/      ← original config.plist + kexts (pre-optimization)
+display_overrides/    ← RGB-forced EDID override attempt (reference)
 ```
 
-## Mudanças aplicadas (resumo)
+## Applied changes (summary)
 
-**Tier 1** — pmset otimizado, `enable-hdmi20`/`agdpmod` removidos, backlight fix Sonoma (`-igfxblt`), `framebuffer-unifiedmem` 2048MB, ECEnabler 1.0.6, card reader forks Baio1977.
+**Tier 1** — pmset tuned, removed `enable-hdmi20`/`agdpmod`, Sonoma backlight fix (`-igfxblt` property), `framebuffer-unifiedmem` 2048MB, ECEnabler 1.0.6, Baio1977 card reader forks.
 
-**Tier 2** — CPUFriend 1.3.0 + DataProvider custom (EPP 0x80→0xC0), áudio layout 97→**86** (mic do jack), con2 HDMI→DP (USB-C).
+**Tier 2** — CPUFriend 1.3.0 + custom DataProvider (EPP 0x80→0xC0), audio layout 97→**86** (jack mic), con2 HDMI→DP (USB-C).
 
-**Tier 3** — HibernationFixup 1.5.5 + RTCMemoryFixup 1.0.8 (`rtcfx_exclude=80-AB,B0-B4`), HibernateMode=NVRAM, DiscardHibernateMap, DisableRtcChecksum, ReservedMemory T490. ~~DisablePROCHOT.efi~~ removido (incompatível).
+**Tier 3** — HibernationFixup 1.5.5 + RTCMemoryFixup 1.0.8 (`rtcfx_exclude=80-AB,B0-B4`), HibernateMode=NVRAM, DiscardHibernateMap, DisableRtcChecksum, T490 ReservedMemory entry. ~~DisablePROCHOT.efi~~ removed (incompatible).
 
-**Extras** — `igfxfw=2` removido (bug GuC), YogaSMCPane + YogaSMCNC instalados, HW accel VideoToolbox confirmado.
+**Extras** — `igfxfw=2` removed (GuC bug), YogaSMCPane + YogaSMCNC, VideoToolbox HW accel verified.
 
-## Uso
+## Usage
 
-1. Monte a ESP: `sudo diskutil mount diskXsY`
-2. Copie `EFI/` para a raiz da ESP
-3. Rode `scripts/tier1_pmset.sh` e `scripts/tier3_pmset.sh` com sudo
+1. Mount ESP: `sudo diskutil mount diskXsY`
+2. Copy `EFI/` to the ESP root
+3. Run `scripts/tier1_pmset.sh` and `scripts/tier3_pmset.sh` with sudo
 4. Reboot
 
-## Avisos
+## Warnings
 
-- ⚠️ **`config.plist` contém SMBIOS serial (MBP16,2)** — se publicar este repo, regenere serials via [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) antes ou edite `PlatformInfo→Generic`.
-- Regenerar `CPUFriendDataProvider` após update de macOS.
-- SSD original (SSSTC CA5) reporta SMART degradado — recomendada troca + backup.
-- Testado: boot, sleep S3→S4, áudio completo, QuickSync, Wi-Fi/BT. Pendente de teste físico: HDMI/USB-C externo.
+- ⚠️ **`config.plist` uses generated SMBIOS serials (MBP16,2)** — **regenerate your own** with [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) before using (`PlatformInfo→Generic`), otherwise iServices will not work.
+- Regenerate `CPUFriendDataProvider` after each macOS update.
+- Native HDMI may output pink-tinted video on monitors that negotiate YCbCr — use a USB-C adapter.
+- Tested: boot, S3→S4 sleep, full audio, QuickSync, Wi-Fi/BT, USB-C display.
 
-## Créditos / Referências
+## Credits / References
 
-- [5T33Z0/Thinkpad-T490-Hackintosh-OpenCore](https://github.com/5T33Z0/Thinkpad-T490-Hackintosh-OpenCore) — hibernação, framebuffer, ReYogaSMC
-- [Baio1977/Lenovo-Thinkpad-T14](https://github.com/Baio1977/Lenovo-Thinkpad-T14) — card reader forks, T14 exato
+- [5T33Z0/Thinkpad-T490-Hackintosh-OpenCore](https://github.com/5T33Z0/Thinkpad-T490-Hackintosh-OpenCore) — hibernation, framebuffer, ReYogaSMC
+- [Baio1977/Lenovo-Thinkpad-T14](https://github.com/Baio1977/Lenovo-Thinkpad-T14) — card reader forks, exact T14
 - [acidanthera](https://github.com/acidanthera) — OpenCore, Lilu, WEG, AppleALC, CPUFriend, HBFX, RTCMemoryFixup
-- [dortania](https://dortania.github.io) — guias base
+- [dortania](https://dortania.github.io) — base guides
