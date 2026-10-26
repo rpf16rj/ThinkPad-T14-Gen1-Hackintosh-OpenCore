@@ -1,0 +1,809 @@
+{
+ "ACPI": {
+  "Add": [
+   {
+    "Comment": "SSDT Full Hack",
+    "Enabled": true,
+    "Path": "SSDT-T14Gen1.aml"
+   }
+  ],
+  "Delete": [],
+  "Patch": [
+   {
+    "Base": "",
+    "BaseSkip": 0,
+    "Comment": "Rename _OSI to XOSI",
+    "Count": 0,
+    "Enabled": true,
+    "Find": "5f4f5349",
+    "Limit": 0,
+    "Mask": "",
+    "OemTableId": "",
+    "Replace": "584f5349",
+    "ReplaceMask": "",
+    "Skip": 0,
+    "TableLength": 0,
+    "TableSignature": ""
+   },
+   {
+    "Base": "",
+    "BaseSkip": 0,
+    "Comment": "Rename Method(GPRW,2,N) to XPRW",
+    "Count": 0,
+    "Enabled": true,
+    "Find": "4750525702",
+    "Limit": 0,
+    "Mask": "",
+    "OemTableId": "",
+    "Replace": "5850525702",
+    "ReplaceMask": "",
+    "Skip": 0,
+    "TableLength": 0,
+    "TableSignature": ""
+   },
+   {
+    "Base": "",
+    "BaseSkip": 0,
+    "Comment": "Rename PNLF to XNLF",
+    "Count": 0,
+    "Enabled": true,
+    "Find": "504e4c46",
+    "Limit": 0,
+    "Mask": "",
+    "OemTableId": "",
+    "Replace": "584e4c46",
+    "ReplaceMask": "",
+    "Skip": 0,
+    "TableLength": 0,
+    "TableSignature": ""
+   }
+  ],
+  "Quirks": {
+   "FadtEnableReset": false,
+   "NormalizeHeaders": false,
+   "RebaseRegions": false,
+   "ResetHwSig": false,
+   "ResetLogoStatus": true,
+   "SyncTableIds": false
+  }
+ },
+ "Booter": {
+  "MmioWhitelist": [],
+  "Patch": [],
+  "Quirks": {
+   "AllowRelocationBlock": false,
+   "AvoidRuntimeDefrag": true,
+   "ClearTaskSwitchBit": false,
+   "DevirtualiseMmio": true,
+   "DisableSingleUser": false,
+   "DisableVariableWrite": false,
+   "DiscardHibernateMap": false,
+   "EnableSafeModeSlide": true,
+   "EnableWriteUnprotector": false,
+   "FixupAppleEfiImages": false,
+   "ForceBooterSignature": false,
+   "ForceExitBootServices": false,
+   "ProtectMemoryRegions": false,
+   "ProtectSecureBoot": false,
+   "ProtectUefiServices": false,
+   "ProvideCustomSlide": true,
+   "ProvideMaxSlide": 0,
+   "RebuildAppleMemoryMap": true,
+   "ResizeAppleGpuBars": -1,
+   "SetupVirtualMap": true,
+   "SignalAppleOS": false,
+   "SyncRuntimePermissions": true
+  }
+ },
+ "DeviceProperties": {
+  "Add": {
+   "PciRoot(0x0)/Pci(0x1F,0x3)": {
+    "AAPL,slot-name": "Internal@0,31,3",
+    "alc-verbs": "01000000",
+    "device_type": "Audio device",
+    "layout-id": 97,
+    "model": "High Definition Audio Controller"
+   },
+   "PciRoot(0x0)/Pci(0x2,0x0)": {
+    "AAPL,GfxYTile": "01000000",
+    "AAPL,ig-platform-id": "00009b3e",
+    "AAPL,slot-name": "Internal",
+    "agdpmod": "pikera",
+    "complete-modeset": "01000000",
+    "complete-modeset-framebuffers": "0000000000000001",
+    "device-id": "9b3e0000",
+    "device_type": "Display controller",
+    "enable-hdmi-dividers-fix": "01000000",
+    "enable-hdmi20": "01000000",
+    "enable-metal": "01000000",
+    "force-online": "01000000",
+    "force-online-framebuffers": "0000000000000001",
+    "framebuffer-con1-busid": "01000000",
+    "framebuffer-con1-enable": "01000000",
+    "framebuffer-con1-flags": "87010000",
+    "framebuffer-con1-index": "01000000",
+    "framebuffer-con1-type": "00080000",
+    "framebuffer-con2-busid": "02000000",
+    "framebuffer-con2-enable": "01000000",
+    "framebuffer-con2-flags": "87010000",
+    "framebuffer-con2-index": "02000000",
+    "framebuffer-con2-type": "00080000",
+    "framebuffer-patch-enable": "01000000",
+    "igfxfw": "02000000",
+    "model": "Intel UHD Graphics 620",
+    "rps-control": "01000000"
+   }
+  },
+  "Delete": {}
+ },
+ "Kernel": {
+  "Add": [
+   {
+    "Arch": "Any",
+    "BundlePath": "Lilu.kext",
+    "Comment": "V1.7.0 | Patch engine",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/Lilu",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "VirtualSMC.kext",
+    "Comment": "V1.3.5 | SMC emulator",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/VirtualSMC",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "SMCBatteryManager.kext",
+    "Comment": "V1.3.5",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/SMCBatteryManager",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "SMCLightSensor.kext",
+    "Comment": "V1.3.5",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/SMCLightSensor",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "SMCProcessor.kext",
+    "Comment": "V1.3.5",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/SMCProcessor",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "SMCSuperIO.kext",
+    "Comment": "V1.3.5",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/SMCSuperIO",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "YogaSMC.kext",
+    "Comment": "V1.5.3 | YogaSMC.kext",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/YogaSMC",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "WhateverGreen.kext",
+    "Comment": "V1.6.9",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/WhateverGreen",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "AppleALC.kext",
+    "Comment": "V1.9.4 | AppleALC.kext",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/AppleALC",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "ECEnabler.kext",
+    "Comment": "V1.0.5",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/ECEnabler",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "BlueToolFixup.kext",
+    "Comment": "V2.6.9 | Monterey BT Injector",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/BlueToolFixup",
+    "MaxKernel": "",
+    "MinKernel": "21.0.0",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "IntelBTPatcher.kext",
+    "Comment": "V2.5.0",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/IntelBTPatcher",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "IntelMausi.kext",
+    "Comment": "V1.0.8 | Intel Ethernet LAN",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/IntelMausi",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "NVMeFix.kext",
+    "Comment": "V1.1.2",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/NVMeFix",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "RealtekCardReader.kext",
+    "Comment": "V0.9.8 | Realtek SDCard Reader (FireWolf)",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/RealtekCardReader",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "RealtekCardReaderFriend.kext",
+    "Comment": "V1.0.5 | Realtek SDCard Reader (FireWolf)",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/RealtekCardReaderFriend",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "RestrictEvents.kext",
+    "Comment": "V1.1.5",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/RestrictEvents",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "VoodooPS2Controller.kext",
+    "Comment": "V2.3.7",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/VoodooPS2Controller",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Mouse.kext",
+    "Comment": "V2.3.7",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/VoodooPS2Mouse",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Keyboard.kext",
+    "Comment": "V2.3.7",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/VoodooPS2Keyboard",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Trackpad.kext",
+    "Comment": "V2.3.7",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/VoodooPS2Trackpad",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "BrightnessKeys.kext",
+    "Comment": "V1.0.3",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/BrightnessKeys",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "VoodooRMI.kext",
+    "Comment": "V1.4.2",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/VoodooRMI",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "VoodooRMI.kext/Contents/PlugIns/VoodooInput.kext",
+    "Comment": "V1.1.6",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/VoodooInput",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "VoodooSMBus.kext",
+    "Comment": "V3.0",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/VoodooSMBus",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "VoodooRMI.kext/Contents/PlugIns/RMISMBus.kext",
+    "Comment": "V1.0",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/RMISMBus",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "AirportItlwm_Sonoma.kext",
+    "Comment": "V2.3.0",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/AirportItlwm",
+    "MaxKernel": "23.99.99",
+    "MinKernel": "23.0.0",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "AirportItlwm-Tahoe.kext",
+    "Comment": "laobamac v2.4.0 - Tahoe only",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/AirportItlwm",
+    "MaxKernel": "",
+    "MinKernel": "25.0.0",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "itlwm.kext",
+    "Comment": "V2.3.0",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/itlwm",
+    "MaxKernel": "24.99.99",
+    "MinKernel": "24.0.0",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "IntelBluetoothFirmware.kext",
+    "Comment": "V2.5.0",
+    "Enabled": true,
+    "ExecutablePath": "Contents/MacOS/IntelBluetoothFirmware",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   },
+   {
+    "Arch": "Any",
+    "BundlePath": "USBPorts.kext",
+    "Comment": "V1.0",
+    "Enabled": true,
+    "ExecutablePath": "",
+    "MaxKernel": "",
+    "MinKernel": "",
+    "PlistPath": "Contents/Info.plist"
+   }
+  ],
+  "Block": [],
+  "Emulate": {
+   "Cpuid1Data": "",
+   "Cpuid1Mask": "",
+   "DummyPowerManagement": false,
+   "MaxKernel": "",
+   "MinKernel": ""
+  },
+  "Force": [],
+  "Patch": [],
+  "Quirks": {
+   "AppleCpuPmCfgLock": false,
+   "AppleXcpmCfgLock": true,
+   "AppleXcpmExtraMsrs": false,
+   "AppleXcpmForceBoost": false,
+   "CustomPciSerialDevice": false,
+   "CustomSMBIOSGuid": true,
+   "DisableIoMapper": true,
+   "DisableIoMapperMapping": true,
+   "DisableLinkeditJettison": true,
+   "DisableRtcChecksum": false,
+   "ExtendBTFeatureFlags": false,
+   "ExternalDiskIcons": false,
+   "ForceAquantiaEthernet": false,
+   "ForceSecureBootScheme": false,
+   "IncreasePciBarSize": false,
+   "LapicKernelPanic": false,
+   "LegacyCommpage": false,
+   "PanicNoKextDump": true,
+   "PowerTimeoutKernelPanic": true,
+   "ProvideCurrentCpuInfo": false,
+   "SetApfsTrimTimeout": -1,
+   "ThirdPartyDrives": false,
+   "XhciPortLimit": false
+  },
+  "Scheme": {
+   "CustomKernel": false,
+   "FuzzyMatch": true,
+   "KernelArch": "Auto",
+   "KernelCache": "Auto"
+  }
+ },
+ "Misc": {
+  "BlessOverride": [],
+  "Boot": {
+   "ConsoleAttributes": 0,
+   "HibernateMode": "None",
+   "HibernateSkipsPicker": false,
+   "HideAuxiliary": false,
+   "InstanceIdentifier": "",
+   "LauncherOption": "Full",
+   "LauncherPath": "Default",
+   "PickerAttributes": 145,
+   "PickerAudioAssist": false,
+   "PickerMode": "External",
+   "PickerVariant": "HackintoshLife",
+   "PollAppleHotKeys": true,
+   "ShowPicker": true,
+   "TakeoffDelay": 0,
+   "Timeout": 3
+  },
+  "Debug": {
+   "AppleDebug": false,
+   "ApplePanic": true,
+   "DisableWatchDog": true,
+   "DisplayDelay": 0,
+   "DisplayLevel": 2147483650,
+   "LogModules": "*",
+   "SysReport": false,
+   "Target": 3
+  },
+  "Entries": [
+   {
+    "Arguments": "",
+    "Auxiliary": false,
+    "Comment": "Not signed for security reasons",
+    "Enabled": false,
+    "Flavour": "Auto",
+    "Name": "CustomOS",
+    "Path": "PciRoot(0x0)/Pci(0x1,0x1)/Pci(0x0,0x0)/NVMe(0x1,11-22-33-44-55-66-77-88)/HD(1,GPT,00000000-0000-0000-0000-000000000000,0x800,0x64000)/\\EFI\\BOOT\\BOOTX64.EFI",
+    "TextMode": false
+   }
+  ],
+  "Security": {
+   "AllowSetDefault": true,
+   "ApECID": 0,
+   "AuthRestart": false,
+   "BlacklistAppleUpdate": true,
+   "DmgLoading": "Signed",
+   "EnablePassword": false,
+   "ExposeSensitiveData": 6,
+   "HaltLevel": 2147483648,
+   "PasswordHash": "",
+   "PasswordSalt": "",
+   "ScanPolicy": 0,
+   "SecureBootModel": "Disabled",
+   "Vault": "Optional"
+  },
+  "Serial": {
+   "Custom": {
+    "BaudRate": 115200,
+    "ClockRate": 1843200,
+    "DetectCable": false,
+    "ExtendedTxFifoSize": 64,
+    "FifoControl": 7,
+    "LineControl": 3,
+    "PciDeviceInfo": "ff",
+    "RegisterAccessWidth": 8,
+    "RegisterBase": 1016,
+    "RegisterStride": 1,
+    "UseHardwareFlowControl": false,
+    "UseMmio": false
+   },
+   "Init": false,
+   "Override": false
+  },
+  "Tools": []
+ },
+ "NVRAM": {
+  "Add": {
+   "4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14": {
+    "DefaultBackgroundColor": "00000000"
+   },
+   "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102": {
+    "rtc-blacklist": ""
+   },
+   "7C436110-AB2A-4BBB-A880-FE41995C9F82": {
+    "#INFO (prev-lang:kbd)": "en:252 (ABC), set 656e3a323532",
+    "ForceDisplayRotationInEFI": 0,
+    "SystemAudioVolume": "46",
+    "boot-args": "-v debug=0x100 keepsyms=1 itlwm_he=1",
+    "csr-active-config": "00000000",
+    "prev-lang:kbd": "en-US:01",
+    "run-efi-updater": "No"
+   }
+  },
+  "Delete": {
+   "4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14": [
+    "DefaultBackgroundColor"
+   ],
+   "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102": [
+    "rtc-blacklist"
+   ],
+   "7C436110-AB2A-4BBB-A880-FE41995C9F82": [
+    "boot-args",
+    "ForceDisplayRotationInEFI"
+   ]
+  },
+  "LegacyOverwrite": false,
+  "LegacySchema": {
+   "7C436110-AB2A-4BBB-A880-FE41995C9F82": [
+    "EFILoginHiDPI",
+    "EFIBluetoothDelay",
+    "LocationServicesEnabled",
+    "SystemAudioVolume",
+    "SystemAudioVolumeDB",
+    "SystemAudioVolumeSaved",
+    "bluetoothActiveControllerInfo",
+    "bluetoothInternalControllerInfo",
+    "flagstate",
+    "fmm-computer-name",
+    "fmm-mobileme-token-FMM",
+    "fmm-mobileme-token-FMM-BridgeHasAccount",
+    "nvda_drv",
+    "prev-lang:kbd"
+   ],
+   "8BE4DF61-93CA-11D2-AA0D-00E098032B8C": [
+    "Boot0080",
+    "Boot0081",
+    "Boot0082",
+    "BootNext",
+    "BootOrder"
+   ]
+  },
+  "WriteFlash": true
+ },
+ "PlatformInfo": {
+  "Automatic": true,
+  "CustomMemory": false,
+  "Generic": {
+   "AdviseFeatures": false,
+   "MLB": "C021111024NP8PG1F",
+   "MaxBIOSVersion": false,
+   "ProcessorType": 0,
+   "ROM": "031a74ed42da",
+   "SpoofVendor": false,
+   "SystemMemoryStatus": "Upgradable",
+   "SystemProductName": "MacBookPro16,2",
+   "SystemSerialNumber": "C02FF0RQML7H",
+   "SystemUUID": "0F3FE61A-9407-4EA0-9278-0D2B3206AEF3"
+  },
+  "UpdateDataHub": true,
+  "UpdateNVRAM": true,
+  "UpdateSMBIOS": true,
+  "UpdateSMBIOSMode": "Custom",
+  "UseRawUuidEncoding": false
+ },
+ "UEFI": {
+  "APFS": {
+   "EnableJumpstart": true,
+   "GlobalConnect": false,
+   "HideVerbose": true,
+   "JumpstartHotPlug": true,
+   "MinDate": 0,
+   "MinVersion": 0
+  },
+  "AppleInput": {
+   "AppleEvent": "Builtin",
+   "CustomDelays": false,
+   "GraphicsInputMirroring": true,
+   "KeyInitialDelay": 50,
+   "KeySubsequentDelay": 5,
+   "PointerDwellClickTimeout": 0,
+   "PointerDwellDoubleClickTimeout": 0,
+   "PointerDwellRadius": 0,
+   "PointerPollMask": -1,
+   "PointerPollMax": 80,
+   "PointerPollMin": 10,
+   "PointerSpeedDiv": 1,
+   "PointerSpeedMul": 1
+  },
+  "Audio": {
+   "AudioCodec": 0,
+   "AudioDevice": "PciRoot(0x0)/Pci(0x1F,0x3)",
+   "AudioOutMask": 1,
+   "AudioSupport": true,
+   "DisconnectHda": false,
+   "MaximumGain": -15,
+   "MinimumAssistGain": -30,
+   "MinimumAudibleGain": -55,
+   "PlayChime": "Enabled",
+   "ResetTrafficClass": false,
+   "SetupDelay": 0
+  },
+  "ConnectDrivers": true,
+  "Drivers": [
+   {
+    "Arguments": "",
+    "Comment": "",
+    "Enabled": true,
+    "HideVerbose": false,
+    "LoadEarly": false,
+    "Path": "AudioDxe.efi"
+   },
+   {
+    "Arguments": "",
+    "Comment": "",
+    "Enabled": true,
+    "HideVerbose": false,
+    "LoadEarly": false,
+    "Path": "HfsPlus.efi"
+   },
+   {
+    "Arguments": "",
+    "Comment": "",
+    "Enabled": true,
+    "HideVerbose": false,
+    "LoadEarly": false,
+    "Path": "OpenCanopy.efi"
+   },
+   {
+    "Arguments": "",
+    "Comment": "",
+    "Enabled": true,
+    "HideVerbose": false,
+    "LoadEarly": false,
+    "Path": "OpenRuntime.efi"
+   },
+   {
+    "Arguments": "",
+    "Comment": "",
+    "Enabled": true,
+    "HideVerbose": false,
+    "LoadEarly": false,
+    "Path": "ResetNvramEntry.efi"
+   },
+   {
+    "Arguments": "",
+    "Comment": "",
+    "Enabled": true,
+    "HideVerbose": false,
+    "LoadEarly": false,
+    "Path": "ToggleSipEntry.efi"
+   }
+  ],
+  "Input": {
+   "KeyFiltering": false,
+   "KeyForgetThreshold": 5,
+   "KeySupport": true,
+   "KeySupportMode": "Auto",
+   "KeySwap": false,
+   "PointerSupport": false,
+   "PointerSupportMode": "",
+   "TimerResolution": 50000
+  },
+  "Output": {
+   "ClearScreenOnModeSwitch": false,
+   "ConsoleFont": "",
+   "ConsoleMode": "",
+   "DirectGopRendering": false,
+   "ForceResolution": false,
+   "GopBurstMode": false,
+   "GopPassThrough": "Disabled",
+   "IgnoreTextInGraphics": false,
+   "InitialMode": "Auto",
+   "ProvideConsoleGop": true,
+   "ReconnectGraphicsOnConnect": false,
+   "ReconnectOnResChange": false,
+   "ReplaceTabWithSpace": false,
+   "Resolution": "Max",
+   "SanitiseClearScreen": false,
+   "TextRenderer": "BuiltinGraphics",
+   "UIScale": 0,
+   "UgaPassThrough": false
+  },
+  "ProtocolOverrides": {
+   "AppleAudio": false,
+   "AppleBootPolicy": false,
+   "AppleDebugLog": false,
+   "AppleEg2Info": false,
+   "AppleFramebufferInfo": false,
+   "AppleImageConversion": false,
+   "AppleImg4Verification": false,
+   "AppleKeyMap": false,
+   "AppleRtcRam": false,
+   "AppleSecureBoot": false,
+   "AppleSmcIo": false,
+   "AppleUserInterfaceTheme": false,
+   "DataHub": false,
+   "DeviceProperties": false,
+   "FirmwareVolume": true,
+   "HashServices": true,
+   "OSInfo": false,
+   "PciIo": false,
+   "UnicodeCollation": false
+  },
+  "Quirks": {
+   "ActivateHpetSupport": false,
+   "DisableSecurityPolicy": false,
+   "EnableVectorAcceleration": true,
+   "EnableVmx": false,
+   "ExitBootServicesDelay": 0,
+   "ForceOcWriteFlash": false,
+   "ForgeUefiSupport": false,
+   "IgnoreInvalidFlexRatio": false,
+   "ReleaseUsbOwnership": true,
+   "ReloadOptionRoms": false,
+   "RequestBootVarRouting": true,
+   "ResizeGpuBars": -1,
+   "ResizeUsePciRbIo": false,
+   "ShimRetainProtocol": false,
+   "TscSyncTimeout": 0,
+   "UnblockFsConnect": false
+  },
+  "ReservedMemory": [],
+  "Unload": []
+ }
+}

@@ -1,0 +1,8 @@
+.DS_Store
+._*
+.fseventsd/
+.Spotlight-V100/
+.Trashes/
+*.dmg
+*.zip
+*.7z
