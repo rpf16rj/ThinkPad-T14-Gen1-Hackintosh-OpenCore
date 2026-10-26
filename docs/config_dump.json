@@ -630,15 +630,15 @@
   "CustomMemory": false,
   "Generic": {
    "AdviseFeatures": false,
-   "MLB": "C021111024NP8PG1F",
+   "MLB": "C02124100QXP8PGAD",
    "MaxBIOSVersion": false,
    "ProcessorType": 0,
-   "ROM": "031a74ed42da",
+   "ROM": "4d2743b3c222",
    "SpoofVendor": false,
    "SystemMemoryStatus": "Upgradable",
    "SystemProductName": "MacBookPro16,2",
-   "SystemSerialNumber": "C02FF0RQML7H",
-   "SystemUUID": "0F3FE61A-9407-4EA0-9278-0D2B3206AEF3"
+   "SystemSerialNumber": "C02FV0K3ML7H",
+   "SystemUUID": "2574CBE7-7A1D-4577-80B3-31152A590A8B"
   },
   "UpdateDataHub": true,
   "UpdateNVRAM": true,
