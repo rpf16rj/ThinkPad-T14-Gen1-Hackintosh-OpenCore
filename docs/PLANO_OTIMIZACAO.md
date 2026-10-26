@@ -185,3 +185,10 @@ sudo pmset -a autopoweroff 0 standby 0 powernap 0 proximitywake 0 hibernatemode 
 
 ---
 *Pesquisa completa em RESEARCH.md · Estado documentado em ESTADO_ATUAL.md · EFI original em efi_snapshot/*
+
+## ✅ TESTE DE DISPLAY EXTERNO (26/10/2026)
+
+- **HDMI nativo (con1/port5)**: imagem com tom rosado (monitor Acer VG240Y V) — negociação **YCbCr** mal resolvida pelo EDID. Override de EDID forçando RGB não carregou (macOS ignorou `/Library/Displays/.../Overrides`).
+- **USB-C → HDMI/DP (con2/port6, DP nativo)**: ✅ **cores perfeitas** — sinal RGB puro, sem workaround.
+- **Workaround recomendado**: usar adaptador USB-C→HDMI/DP para monitores. Alternativa futura: patch `framebuffer-con1-flags` ou SwitchResX.
+- Override removível: `sudo rm -rf /Library/Displays/Contents/Resources/Overrides/DisplayVendorID-472` (instalado mas sem efeito — arquivo em `display_overrides/` mantido no repo p/ referência)
