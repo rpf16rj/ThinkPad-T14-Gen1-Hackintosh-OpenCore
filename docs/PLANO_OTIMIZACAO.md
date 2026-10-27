@@ -209,3 +209,11 @@ sudo pmset -a autopoweroff 0 standby 0 powernap 0 proximitywake 0 hibernatemode 
 - [x] **`rps-control` removido** — causa documentada de iGPU presa em freq máxima → calor (WEG 1.4.2 o desabilitou por padrão)
 - [x] **RealtekCardReader + Friend desabilitados** — timeout de 180s em power-state callback (issue #55) + panics no 14.7.2 (#58) = provável causa do resume de ~5min. Re-ativar se usar leitor SD, com `-rtsxnopm`
 - Confirmado: SSD SSSTC CA5 (não é PM981 problemático), RestrictEvents/SMCLightSensor corretamente desabilitados, force-online/unifiedmem mantidos
+
+## ✅ VALIDAÇÃO FINAL (27/10) — todos os bugs corrigidos
+- [x] Wi-Fi pós-sleep: **resolvido** (pci-aspm-default=0 + portas internas USB corretas)
+- [x] CPU spike ao plugar AC: **resolvido** (YogaSMC era o culpado — validado)
+- [x] Resume ~5min: **resolvido** (card reader off + rps-control removido → resume rápido)
+- [x] Bluetooth morto + webcam: **resolvido** (USBPorts model MBP15,4→16,2)
+- [x] FeatureUnlock 1.1.8 ativo
+- Pendente: ReYogaSMC (thresholds/DYTC) como teste futuro; backup do sistema
