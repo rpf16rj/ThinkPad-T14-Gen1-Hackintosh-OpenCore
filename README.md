@@ -12,15 +12,18 @@ Optimized, documented EFI for the **Lenovo ThinkPad T14 Gen 1** running **macOS 
 | iGPU | UHD 620 (`0x9B3E`, platform `0x3E9B0000`) | ✅ Metal 3, QuickSync H.264/HEVC |
 | RAM | 40 GB | ✅ |
 | Audio | Realtek ALC257 | ✅ layout-id 86 (headset jack mic works) |
-| Wi-Fi/BT | Intel CNVi | ✅ AirportItlwm 2.3.0 + BT stack |
+| Wi-Fi | Intel CNVi AX201 | ✅ AirportItlwm 2.3.0 + `pci-aspm-default=0` (survives sleep) |
+| Bluetooth | Intel AX201 | ✅ works (USB map fix) |
+| Webcam | AzureWave (USB internal) | ✅ works (USB map fix) |
 | Ethernet | Intel I219 | ✅ IntelMausi |
 | Trackpad/TrackPoint | Synaptics RMI | ✅ VoodooRMI SMBus |
-| SD reader | Realtek | ✅ Baio1977 forks (14.4+ fix) |
-| Battery | 50Wh | ✅ SMCBatteryManager + YogaSMC |
+| SD reader | Realtek RTS522A | ⛔ kext disabled (180s sleep-timeout bug, issue #55) |
+| Battery | 50Wh | ✅ SMCBatteryManager (YogaSMC disabled — EC contention on AC plug) |
 | Sleep/Hibernate | S3 + real S4 | ✅ hibernatemode 25, 5min standby |
 | External display | USB-C (DP alt-mode) | ✅ perfect color output |
+| Feature unlocks | Sidecar/AirPlay/Night Shift | ✅ FeatureUnlock 1.1.8 (AWDL absent — Sidecar is wired-only) |
 | ⚠️ Native HDMI port | EDID negotiates YCbCr on some monitors | ⚠️ use USB-C adapter instead |
-| ⚠️ Internal mic | Intel SST | ❌ no driver (use headset) |
+| ⚠️ Internal mic | exposed via layout 86 | ⚠️ input not yet confirmed — use headset if needed |
 | ⚠️ Premium DRM | iGPU-only | ❌ Netflix/Prime only via browser |
 
 ## Structure
@@ -48,6 +51,8 @@ display_overrides/    ← RGB-forced EDID override attempt (reference)
 **Tier 3** — HibernationFixup 1.5.5 + RTCMemoryFixup 1.0.8 (`rtcfx_exclude=80-AB,B0-B4`), HibernateMode=NVRAM, DiscardHibernateMap, DisableRtcChecksum, T490 ReservedMemory entry. ~~DisablePROCHOT.efi~~ removed (incompatible).
 
 **Extras** — `igfxfw=2` removed (GuC bug), YogaSMCPane + YogaSMCNC, VideoToolbox HW accel verified.
+
+**Bug-hunt** — `pci-aspm-default=0` on Wi-Fi device (fixes post-sleep disconnect); `rps-control` removed (iGPU stuck at max clock → heat); YogaSMC/SMCLightSensor/RestrictEvents disabled (YogaSMC caused EC contention → `kernel_task` 100% on AC plug); RealtekCardReader+Friend disabled (180s power-state timeout → slow resume); `USBPorts.kext` model key fixed `MacBookPro15,4→16,2` (unlocked Bluetooth + webcam); FeatureUnlock 1.1.8 added. All validated on hardware.
 
 ## Usage
 
