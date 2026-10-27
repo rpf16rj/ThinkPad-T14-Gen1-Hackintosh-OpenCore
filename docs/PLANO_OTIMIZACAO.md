@@ -204,3 +204,8 @@ sudo pmset -a autopoweroff 0 standby 0 powernap 0 proximitywake 0 hibernatemode 
 **Diagnóstico pendente (usuário):** plugar carregador após reboot → se CPU normal = YogaSMC era o culpado. Se spike persistir → próximo teste é `-eceoff`/desabilitar ECEnabler (issue #24 idêntica).
 
 **Confirmado OK pela pesquisa:** AppleALC 1.9.8+layout86, WEG 1.7.1+rps-control/unifiedmem, NVMeFix, IntelMausi, VoodooPS2+RMI stack, AirportItlwm build 14.4, rtcfx ranges, HibernateMode=NVRAM. `RebuildAppleMemoryMap=True` mantido (diverge do T490 mas hibernação funciona).
+
+## ✅ BUG-HUNT pt.2 (27/10) — GPU/storage
+- [x] **`rps-control` removido** — causa documentada de iGPU presa em freq máxima → calor (WEG 1.4.2 o desabilitou por padrão)
+- [x] **RealtekCardReader + Friend desabilitados** — timeout de 180s em power-state callback (issue #55) + panics no 14.7.2 (#58) = provável causa do resume de ~5min. Re-ativar se usar leitor SD, com `-rtsxnopm`
+- Confirmado: SSD SSSTC CA5 (não é PM981 problemático), RestrictEvents/SMCLightSensor corretamente desabilitados, force-online/unifiedmem mantidos
