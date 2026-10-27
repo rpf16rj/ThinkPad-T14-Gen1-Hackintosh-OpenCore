@@ -208,6 +208,13 @@
 	<dict>
 		<key>Add</key>
 		<dict>
+			<key>PciRoot(0x0)/Pci(0x14,0x3)</key>
+			<dict>
+				<key>pci-aspm-default</key>
+				<data>
+				AAAAAA==
+				</data>
+			</dict>
 			<key>PciRoot(0x0)/Pci(0x1F,0x3)</key>
 			<dict>
 				<key>AAPL,slot-name</key>
@@ -319,10 +326,6 @@
 				</data>
 				<key>model</key>
 				<string>Intel UHD Graphics 620</string>
-				<key>rps-control</key>
-				<data>
-				AQAAAA==
-				</data>
 			</dict>
 		</dict>
 		<key>Delete</key>
@@ -392,9 +395,9 @@
 				<key>BundlePath</key>
 				<string>SMCLightSensor.kext</string>
 				<key>Comment</key>
-				<string>V1.3.5</string>
+				<string>V1.3.5 [DISABLED: bug-hunt 27/10]</string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/SMCLightSensor</string>
 				<key>MaxKernel</key>
@@ -446,9 +449,9 @@
 				<key>BundlePath</key>
 				<string>YogaSMC.kext</string>
 				<key>Comment</key>
-				<string>V1.5.3 | YogaSMC.kext</string>
+				<string>V1.5.3 | YogaSMC.kext [DISABLED: bug-hunt 27/10]</string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/YogaSMC</string>
 				<key>MaxKernel</key>
@@ -662,9 +665,9 @@
 				<key>BundlePath</key>
 				<string>RealtekCardReader.kext</string>
 				<key>Comment</key>
-				<string>V0.9.8 | Baio1977 fork (Sonoma 14.4+ fix)</string>
+				<string>V0.9.8 | Baio1977 fork (Sonoma 14.4+ fix) [DISABLED: sleep-timeout bug]</string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/RealtekCardReader</string>
 				<key>MaxKernel</key>
@@ -680,9 +683,9 @@
 				<key>BundlePath</key>
 				<string>RealtekCardReaderFriend.kext</string>
 				<key>Comment</key>
-				<string>V1.0.6 | Baio1977 fork (Sonoma 14.4+ fix)</string>
+				<string>V1.0.6 | Baio1977 fork (Sonoma 14.4+ fix) [DISABLED: sleep-timeout bug]</string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/RealtekCardReaderFriend</string>
 				<key>MaxKernel</key>
@@ -698,9 +701,9 @@
 				<key>BundlePath</key>
 				<string>RestrictEvents.kext</string>
 				<key>Comment</key>
-				<string>V1.1.5</string>
+				<string>V1.1.5 [DISABLED: bug-hunt 27/10]</string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/RestrictEvents</string>
 				<key>MaxKernel</key>
@@ -955,6 +958,24 @@
 				<true/>
 				<key>ExecutablePath</key>
 				<string></string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string></string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>BundlePath</key>
+				<string>FeatureUnlock.kext</string>
+				<key>Comment</key>
+				<string>Sidecar/AirPlay/NightShift unlock</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/FeatureUnlock</string>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
@@ -1291,14 +1312,14 @@
 			<key>AdviseFeatures</key>
 			<false/>
 			<key>MLB</key>
-			<string>C02124100QXP8PGAD</string>
+			<string>C021111024NP8PG1F</string>
 			<key>MaxBIOSVersion</key>
 			<false/>
 			<key>ProcessorType</key>
 			<integer>0</integer>
 			<key>ROM</key>
 			<data>
-			TSdDs8Ii
+			Axp07ULa
 			</data>
 			<key>SpoofVendor</key>
 			<false/>
@@ -1307,9 +1328,9 @@
 			<key>SystemProductName</key>
 			<string>MacBookPro16,2</string>
 			<key>SystemSerialNumber</key>
-			<string>C02FV0K3ML7H</string>
+			<string>C02FF0RQML7H</string>
 			<key>SystemUUID</key>
-			<string>2574CBE7-7A1D-4577-80B3-31152A590A8B</string>
+			<string>0F3FE61A-9407-4EA0-9278-0D2B3206AEF3</string>
 		</dict>
 		<key>UpdateDataHub</key>
 		<true/>
