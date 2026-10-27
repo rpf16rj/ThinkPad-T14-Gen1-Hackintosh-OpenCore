@@ -217,3 +217,12 @@ sudo pmset -a autopoweroff 0 standby 0 powernap 0 proximitywake 0 hibernatemode 
 - [x] Bluetooth morto + webcam: **resolvido** (USBPorts model MBP15,4→16,2)
 - [x] FeatureUnlock 1.1.8 ativo
 - Pendente: ReYogaSMC (thresholds/DYTC) como teste futuro; backup do sistema
+
+## ✅ USB/Bluetooth/Webcam (27/10)
+- [x] **Bug raiz**: `USBPorts.kext` tinha `model = MacBookPro15,4` vs SMBIOS real `MacBookPro16,2` → mapa nunca aplicava → só portas `_UPC` padrão (HS02-05) enumeravam
+- [x] Fix: model corrigido nas 2 personalities → HS08 (webcam AzureWave) + HS10 (BT Intel 8087:0026, fw v256 c256) passaram a enumerar
+- [x] USB 3.x: SS02-SS05 + SS01 (controller USB-C) instanciadas
+- [x] Diagnóstico via USBInjectAll + XhciPortLimit (removido após fix)
+- [x] Validado pelo usuário: webcam + BT funcionando
+- ⏳ Mic interno: dispositivo exposto (layout 86), testar seleção "Internal Microphone" no Input — se falhar, testar alcid alternativo
+- ⏳ Validar velocidade USB 3 (5 Gb/s) com device real
