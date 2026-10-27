@@ -192,3 +192,15 @@ sudo pmset -a autopoweroff 0 standby 0 powernap 0 proximitywake 0 hibernatemode 
 - **USB-C → HDMI/DP (con2/port6, DP nativo)**: ✅ **cores perfeitas** — sinal RGB puro, sem workaround.
 - **Workaround recomendado**: usar adaptador USB-C→HDMI/DP para monitores. Alternativa futura: patch `framebuffer-con1-flags` ou SwitchResX.
 - Override removível: `sudo rm -rf /Library/Displays/Contents/Resources/Overrides/DisplayVendorID-472` (instalado mas sem efeito — arquivo em `display_overrides/` mantido no repo p/ referência)
+
+## ✅ BUG-HUNT SPEC-DRIVEN (27/10/2026)
+
+**Aplicado na EFI:**
+- [x] `pci-aspm-default=0` em `PciRoot(0x0)/Pci(0x14,0x3)` (CNVW/AX201) — fix Wi-Fi morto pós-sleep (ASPM L1 reativado no wake; itlwm issues #746/#519/#236)
+- [x] **RestrictEvents.kext desabilitado** — no-op sem `revpatch=` boot-arg
+- [x] **SMCLightSensor.kext desabilitado** — sem hardware ALS no T14
+- [x] **YogaSMC.kext desabilitado (teste)** — suspeito #1 do spike de CPU ao plugar carregador (contenção de EC c/ SMCBatteryManager+ECEnabler; issue ECEnabler#24, YogaSMC#211/#44) + conflito documentado com CPUFriend. YogaSMCNC/Pane deixam de funcionar; thresholds de bateria ficam no BIOS.
+
+**Diagnóstico pendente (usuário):** plugar carregador após reboot → se CPU normal = YogaSMC era o culpado. Se spike persistir → próximo teste é `-eceoff`/desabilitar ECEnabler (issue #24 idêntica).
+
+**Confirmado OK pela pesquisa:** AppleALC 1.9.8+layout86, WEG 1.7.1+rps-control/unifiedmem, NVMeFix, IntelMausi, VoodooPS2+RMI stack, AirportItlwm build 14.4, rtcfx ranges, HibernateMode=NVRAM. `RebuildAppleMemoryMap=True` mantido (diverge do T490 mas hibernação funciona).
