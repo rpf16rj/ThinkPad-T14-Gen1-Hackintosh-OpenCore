@@ -23,7 +23,7 @@ Optimized, documented EFI for the **Lenovo ThinkPad T14 Gen 1** running **macOS 
 | External display | USB-C (DP alt-mode) | ✅ perfect color output |
 | Feature unlocks | Sidecar/AirPlay/Night Shift | ✅ FeatureUnlock 1.1.8 (AWDL absent — Sidecar is wired-only) |
 | ⚠️ Native HDMI port | EDID negotiates YCbCr on some monitors | ⚠️ use USB-C adapter instead |
-| ⚠️ Internal mic | exposed via layout 86 | ⚠️ input not yet confirmed — use headset if needed |
+| ❌ Internal mic | Intel SST/cAVS DSP (not ALC257) | ❌ no macOS driver exists — use headset/USB mic |
 | ⚠️ Premium DRM | iGPU-only | ❌ Netflix/Prime only via browser |
 
 ## Structure

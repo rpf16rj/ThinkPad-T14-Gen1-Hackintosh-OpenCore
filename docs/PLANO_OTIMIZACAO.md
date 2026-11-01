@@ -248,3 +248,6 @@ sudo pmset -a autopoweroff 0 standby 0 powernap 0 proximitywake 0 hibernatemode 
 Props removidos (causaram tela preta com backlight — sistema vivo sem imagem):
 `enable-dpcd-max-link-rate-fix`, `dpcd-max-link-rate`, `enable-backlight-smoother`, `framebuffer-conX-flags` (restaurado 0x187)
 Provável culpado: `enable-backlight-smoother` no eDP. Mantidos: igfxfw=2, hbfx-ahbm=15, Target=0, XhciPortLimit off, RMI tune.
+
+## ❌ MIC INTERNO — dead end confirmado (31/10)
+Mic array interno = DMIC digital no Intel SST/cAVS DSP (PCH), NÃO no ALC257. Lenovo lista 3 devices separados no driver Windows; Linux precisa de sof-firmware. 6 layouts ALC257 testados pela comunidade (11,18,86,96,97,99,100) — nenhum captura; pin 0x12 eletricamente desconectado no T14 (diferente do T480). SEM driver macOS para SST = fix impossível. Workaround: headset jack / USB mic.
