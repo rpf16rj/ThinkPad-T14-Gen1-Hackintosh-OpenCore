@@ -243,3 +243,8 @@ sudo pmset -a autopoweroff 0 standby 0 powernap 0 proximitywake 0 hibernatemode 
 **Manual (vc faz):**
 - Settings → Accessibility → Display → **Reduce Transparency** + **Reduce Motion** (domínio protegido)
 - Safari: manter 17.x (não usar Safari 26 no Sonoma — crashes documentados)
+
+## ⚠️ REVERT (31/10) — black screen no boot
+Props removidos (causaram tela preta com backlight — sistema vivo sem imagem):
+`enable-dpcd-max-link-rate-fix`, `dpcd-max-link-rate`, `enable-backlight-smoother`, `framebuffer-conX-flags` (restaurado 0x187)
+Provável culpado: `enable-backlight-smoother` no eDP. Mantidos: igfxfw=2, hbfx-ahbm=15, Target=0, XhciPortLimit off, RMI tune.
