@@ -73,3 +73,21 @@ echo ""
 echo "PRONTO. Passos manuais opcionais:"
 echo "- Chrome/Firefox: apontar cache pro /Volumes/RAMD (ou browser.cache.disk.enable=false no Firefox = RAM-only)"
 echo "- tmutil: mantenha 'Back Up Automatically' OFF (senao volta a gerar snapshots)"
+
+# --- ROUND 2 (final sweep) ---
+# I/O throttle off p/ background tasks (TM/backups full speed)
+cat > /Library/LaunchDaemons/local.nothrottle.plist << 'PL'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>Label</key><string>local.nothrottle</string>
+<key>ProgramArguments</key><array>
+<string>/bin/sh</string><string>-c</string>
+<string>/usr/sbin/sysctl -w debug.lowpri_throttle_enabled=0 net.inet.tcp.sendspace=4194304 net.inet.tcp.recvspace=4194304 net.inet.tcp.win_scale_factor=8</string>
+</array>
+<key>RunAtLoad</key><true/>
+</dict></plist>
+PL
+launchctl load -w /Library/LaunchDaemons/local.nothrottle.plist
+sysctl -w debug.lowpri_throttle_enabled=0 net.inet.tcp.sendspace=4194304 net.inet.tcp.recvspace=4194304 net.inet.tcp.win_scale_factor=8
+echo "[9] io-throttle off + tcp windows ok"

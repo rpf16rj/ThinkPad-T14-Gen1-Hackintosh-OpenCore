@@ -266,3 +266,13 @@ Mic array interno = DMIC digital no Intel SST/cAVS DSP (PCH), NÃO no ALC257. Le
 - VoltageShift PL1=12W (maior ganho de bateria sob carga, ~3-5W) — projeto opcional
 - Charge thresholds: T14 não tem no BIOS → via Linux USB (sysfs thinkpad_acpi)
 - Firefox: `browser.cache.disk.enable=false` = cache só em RAM
+
+## ✅ FINAL SWEEP (31/10) — últimos exóticos
+- [x] **VoodooRMI bug real**: chave `DisableWhileTrackpointTimeout ` (trailing space) nunca era lida → palm-rejection do TrackPoint quebrado. Corrigido + deadzone 0→2 (evita drift)
+- [x] `prev-lang:kbd` `en-US:01`→`en-US:0` (seedava input source errado)
+- [x] FontSmoothing 2→3 (strong — favorito em non-retina)
+- [x] Sidecar wired defaults extras
+- [x] io-throttle off + TCP windows 4MB (script round 2)
+- Nota: hbfx-ahbm mantido 15 (capacity bits inverteriam a hibernação overnight que vc quer)
+- Verificar: `sysctl machdep.xcpm.vectors_loaded_count` (CPU vectors), `pmset -g thermlog` (PROCHOT)
+- Opcional: ICC calibrado do Notebookcheck (painel AUO B140HAN05.7 — ΔE 3.6→1.2)
