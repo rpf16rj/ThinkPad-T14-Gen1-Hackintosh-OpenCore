@@ -256,7 +256,19 @@
 				</data>
 				<key>device_type</key>
 				<string>Display controller</string>
+				<key>dpcd-max-link-rate</key>
+				<data>
+				FAAAAA==
+				</data>
 				<key>enable-backlight-registers-alternative-fix</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>enable-backlight-smoother</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>enable-dpcd-max-link-rate-fix</key>
 				<data>
 				AQAAAA==
 				</data>
@@ -286,7 +298,7 @@
 				</data>
 				<key>framebuffer-con1-flags</key>
 				<data>
-				hwEAAA==
+				xwMAAA==
 				</data>
 				<key>framebuffer-con1-index</key>
 				<data>
@@ -306,7 +318,7 @@
 				</data>
 				<key>framebuffer-con2-flags</key>
 				<data>
-				hwEAAA==
+				xwMAAA==
 				</data>
 				<key>framebuffer-con2-index</key>
 				<data>
@@ -323,6 +335,10 @@
 				<key>framebuffer-unifiedmem</key>
 				<data>
 				AAAAgA==
+				</data>
+				<key>igfxfw</key>
+				<data>
+				AgAAAA==
 				</data>
 				<key>model</key>
 				<string>Intel UHD Graphics 620</string>
@@ -1052,7 +1068,7 @@
 			<key>ThirdPartyDrives</key>
 			<false/>
 			<key>XhciPortLimit</key>
-			<true/>
+			<false/>
 		</dict>
 		<key>Scheme</key>
 		<dict>
@@ -1120,7 +1136,7 @@
 			<key>SysReport</key>
 			<false/>
 			<key>Target</key>
-			<integer>3</integer>
+			<integer>0</integer>
 		</dict>
 		<key>Entries</key>
 		<array>
@@ -1241,7 +1257,7 @@
 				Rg==
 				</data>
 				<key>boot-args</key>
-				<string>-v debug=0x100 keepsyms=1 itlwm_he=1 rtcfx_exclude=80-AB,B0-B4</string>
+				<string>-v debug=0x100 keepsyms=1 rtcfx_exclude=80-AB,B0-B4 hbfx-ahbm=15</string>
 				<key>csr-active-config</key>
 				<data>
 				AAAAAA==

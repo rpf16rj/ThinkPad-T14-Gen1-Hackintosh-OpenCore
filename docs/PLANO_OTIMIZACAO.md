@@ -226,3 +226,20 @@ sudo pmset -a autopoweroff 0 standby 0 powernap 0 proximitywake 0 hibernatemode 
 - [x] Validado pelo usuário: webcam + BT funcionando
 - ⏳ Mic interno: dispositivo exposto (layout 86), testar seleção "Internal Microphone" no Input — se falhar, testar alcid alternativo
 - ⏳ Validar velocidade USB 3 (5 Gb/s) com device real
+
+## ✅ TWEAKS FINAIS (31/10) — rodada 2 de pesquisa
+**EFI (aplicam no prox boot):**
+- `itlwm_he=1` removido (no-op em build upstream) + `hbfx-ahbm=15` (hiberna só desplugado+tampa fechada → menos writes de sleepimage)
+- `Misc→Debug→Target=0` (parou de gravar log OC no EFI a cada boot)
+- `XhciPortLimit=false` (mapa pronto)
+- iGPU: `enable-dpcd-max-link-rate-fix` + `dpcd-max-link-rate=HBR2` (estabilidade display ext), `enable-backlight-smoother`, `framebuffer-conX-flags` → valores de Mac real (0x3C7)
+- `igfxfw=2` RESTAURADO (GuC on sem rps-control = combo validado, matou stutter de UI)
+- VoodooRMI: TrackPoint 2x mais rápido, deadzone 0
+
+**Sistema (ativos já):**
+- 19 daemons mortos off (iCloud/Continuity/analytics/Siri/photoanalysis — reversível via `launchctl enable`)
+- Animações de janela/Dock/Finder off, tinting off, .DS_Store em rede/USB off
+
+**Manual (vc faz):**
+- Settings → Accessibility → Display → **Reduce Transparency** + **Reduce Motion** (domínio protegido)
+- Safari: manter 17.x (não usar Safari 26 no Sonoma — crashes documentados)
