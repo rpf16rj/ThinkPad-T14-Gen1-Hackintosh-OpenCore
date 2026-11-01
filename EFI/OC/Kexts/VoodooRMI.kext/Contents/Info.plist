@@ -69,7 +69,7 @@
 				<key>TrackpointMultiplier</key>
 				<integer>40</integer>
 				<key>TrackpointScrollMultiplierX</key>
-				<integer>30</integer>
+				<integer>40</integer>
 				<key>TrackpointScrollMultiplierY</key>
 				<integer>40</integer>
 			</dict>

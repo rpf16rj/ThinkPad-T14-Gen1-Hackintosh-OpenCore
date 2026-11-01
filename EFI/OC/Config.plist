@@ -246,10 +246,6 @@
 				<data>
 				AQAAAA==
 				</data>
-				<key>complete-modeset-framebuffers</key>
-				<data>
-				AAAAAAAAAAE=
-				</data>
 				<key>device-id</key>
 				<data>
 				mz4AAA==
@@ -264,17 +260,9 @@
 				<data>
 				AQAAAA==
 				</data>
-				<key>enable-metal</key>
-				<data>
-				AQAAAA==
-				</data>
 				<key>force-online</key>
 				<data>
 				AQAAAA==
-				</data>
-				<key>force-online-framebuffers</key>
-				<data>
-				AAAAAAAAAAE=
 				</data>
 				<key>framebuffer-con1-busid</key>
 				<data>
@@ -1026,7 +1014,7 @@
 			<key>DisableIoMapper</key>
 			<true/>
 			<key>DisableIoMapperMapping</key>
-			<true/>
+			<false/>
 			<key>DisableLinkeditJettison</key>
 			<true/>
 			<key>DisableRtcChecksum</key>
@@ -1245,7 +1233,7 @@
 				Rg==
 				</data>
 				<key>boot-args</key>
-				<string>-v debug=0x100 keepsyms=1 rtcfx_exclude=80-AB,B0-B4 hbfx-ahbm=15</string>
+				<string>-v debug=0x100 keepsyms=1 rtcfx_exclude=80-AB,B0-B4 hbfx-ahbm=15 io80211.awdl=0</string>
 				<key>csr-active-config</key>
 				<data>
 				AAAAAA==
