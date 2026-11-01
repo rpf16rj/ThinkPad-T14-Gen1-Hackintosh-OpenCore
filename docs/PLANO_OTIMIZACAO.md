@@ -251,3 +251,18 @@ Provável culpado: `enable-backlight-smoother` no eDP. Mantidos: igfxfw=2, hbfx-
 
 ## ❌ MIC INTERNO — dead end confirmado (31/10)
 Mic array interno = DMIC digital no Intel SST/cAVS DSP (PCH), NÃO no ALC257. Lenovo lista 3 devices separados no driver Windows; Linux precisa de sof-firmware. 6 layouts ALC257 testados pela comunidade (11,18,86,96,97,99,100) — nenhum captura; pin 0x12 eletricamente desconectado no T14 (diferente do T480). SEM driver macOS para SST = fix impossível. Workaround: headset jack / USB mic.
+
+## ✅ BATERIA + SSD round (31/10) — deep research #3
+**EFI (prox boot):**
+- `pci-aspm-default`=0x2 no NVMe (RP13 bridge + device) → −0.5-1.5W idle
+- `pci-aspm-default`=0x3 no I219 Ethernet → −0.2-0.4W
+- `perf-bias`=0x0F no CPUFriendDataProvider → −0.2-0.5W idle
+- `io80211.awdl=0`, IPv6 link-local (Wi-Fi)
+
+**OS (script `scripts/ssd_battery_tweaks.sh`, roda com sudo):**
+- noatime no Data vol, logd persist off, ReportCrash off, TM snapshots purga, Spotlight off, womp/acwake off, sysctls (delayed_ack, fd limits), RAM disk 1GB p/ caches
+
+**Decisão do usuário pendente:**
+- VoltageShift PL1=12W (maior ganho de bateria sob carga, ~3-5W) — projeto opcional
+- Charge thresholds: T14 não tem no BIOS → via Linux USB (sysfs thinkpad_acpi)
+- Firefox: `browser.cache.disk.enable=false` = cache só em RAM
