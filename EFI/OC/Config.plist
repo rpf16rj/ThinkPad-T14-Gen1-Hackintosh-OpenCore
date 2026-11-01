@@ -873,9 +873,9 @@
 				<key>BundlePath</key>
 				<string>AirportItlwm_Sonoma.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0</string>
+				<string>V2.3.0 [OFF: itlwm+HeliPort swap]</string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/AirportItlwm</string>
 				<key>MaxKernel</key>
@@ -909,7 +909,7 @@
 				<key>BundlePath</key>
 				<string>itlwm.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0</string>
+				<string>V2.3.0 [ethernet-spoof mode]</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -917,7 +917,7 @@
 				<key>MaxKernel</key>
 				<string>24.99.99</string>
 				<key>MinKernel</key>
-				<string>24.0.0</string>
+				<string>23.0.0</string>
 				<key>PlistPath</key>
 				<string>Contents/Info.plist</string>
 			</dict>
